@@ -1,0 +1,6 @@
+# view AndroidManifest.xml #generated:17
+-keep class com.google.api.services.samples.calendar.android.CalendarSample { <init>(...); }
+
+# view AndroidManifest.xml #generated:26
+-keep class com.google.api.services.samples.calendar.android.MihaiCalendarActivity { <init>(...); }
+
