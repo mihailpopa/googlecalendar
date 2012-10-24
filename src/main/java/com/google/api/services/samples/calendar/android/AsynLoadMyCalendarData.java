@@ -106,6 +106,7 @@ public class AsynLoadMyCalendarData extends AsyncTask<Void, Void, Void>{
               setAccountName(bundle.getString(AccountManager.KEY_ACCOUNT_NAME));
               setAuthToken(bundle.getString(AccountManager.KEY_AUTHTOKEN));
               onAuthToken();
+              Log.d(TAG, "The auth token is " + authToken);
             } catch (OperationCanceledException e) {
               // user canceled
             } catch (AuthenticatorException e) {
@@ -137,8 +138,12 @@ public class AsynLoadMyCalendarData extends AsyncTask<Void, Void, Void>{
         public void run() {
           Calendar cal;
           try {
-            cal = calendar.calendars().get("mihail.popa@xoomworks.com").execute();
-            Log.d(TAG, "Calendar   info: " + cal.toPrettyString());          
+            cal = calendar.calendars().get("xoomworks.com_2d37303439353033372d323736@resource.calendar.google.com").execute();
+            com.google.api.services.calendar.Calendar.Events.List list = calendar.events().list("mihail.popa@xoomworks.com");
+            com.google.api.services.calendar.model.Events events = list.execute();
+            
+            
+            Log.d(TAG, "Total number of events is: " + events.getItems().size());          
 
           } catch (IOException exception) {
             Log.e(TAG, "There was an exception accessing calendar data");
