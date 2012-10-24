@@ -139,12 +139,17 @@ public class AsynLoadMyCalendarData extends AsyncTask<Void, Void, Void>{
           Calendar cal;
           try {
             cal = calendar.calendars().get("xoomworks.com_2d37303439353033372d323736@resource.calendar.google.com").execute();
-            com.google.api.services.calendar.Calendar.Events.List list = calendar.events().list("mihail.popa@xoomworks.com");
+            com.google.api.services.calendar.Calendar.Events.List list = calendar.events().list("xoomworks.com_2d37303439353033372d323736@resource.calendar.google.com");
             com.google.api.services.calendar.model.Events events = list.execute();
-            
-            
-            Log.d(TAG, "Total number of events is: " + events.getItems().size());          
+            for (com.google.api.services.calendar.model.Event event : events.getItems())
+            {
+              if (event.getRecurringEventId() != null)
+                Log.d(TAG, "Recurring event: " + event.getRecurringEventId());
 
+              if (event.getStart() != null)
+                
+              Log.d(TAG, "Event date: " + event.getStart().toPrettyString());
+            }
           } catch (IOException exception) {
             Log.e(TAG, "There was an exception accessing calendar data");
             exception.printStackTrace();
